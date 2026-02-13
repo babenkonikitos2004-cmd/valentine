@@ -485,6 +485,164 @@
             }
         }
 
+        /* Квест */
+        .quest-container {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 700px;
+            width: 90%;
+            animation: modalAppear 0.6s ease;
+            text-align: center;
+        }
+
+        .quest-title {
+            font-size: 42px;
+            color: #f5576c;
+            margin-bottom: 30px;
+            font-family: 'Permanent Marker', cursive;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .loading-section {
+            padding: 60px 20px;
+        }
+
+        .loader-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #f5576c;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 28px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .quest-content {
+            animation: fadeIn 1s ease;
+        }
+
+        .quest-icon {
+            font-size: 100px;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .quest-subtitle {
+            font-size: 28px;
+            color: #667eea;
+            margin-bottom: 40px;
+            line-height: 1.4;
+        }
+
+        .quest-hint {
+            margin: 40px 0;
+        }
+
+        .hint-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border: 4px solid #f5576c;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .hint-icon {
+            font-size: 60px;
+            margin: 10px 0;
+        }
+
+        .hint-text {
+            font-size: 24px;
+            color: #333;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+
+        .quest-steps {
+            margin: 50px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .step {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px 30px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateX(10px);
+        }
+
+        .step-number {
+            background: #f5576c;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-size: 20px;
+            color: #333;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .step-arrow {
+            font-size: 40px;
+            color: #f5576c;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        .quest-footer-note {
+            margin-top: 50px;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            color: white;
+        }
+
+        .quest-footer-note p {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+
         @media (max-width: 768px) {
             .modal, .quiz-container, .results-container {
                 padding: 30px 25px;
@@ -517,6 +675,22 @@
 
             .stat-number {
                 font-size: 36px;
+            }
+
+            .quest-title {
+                font-size: 32px;
+            }
+
+            .quest-subtitle {
+                font-size: 22px;
+            }
+
+            .hint-text {
+                font-size: 20px;
+            }
+
+            .step-text {
+                font-size: 16px;
             }
         }
 
@@ -614,7 +788,7 @@
         <div class="modal">
             <div class="emoji">💝</div>
             <h1>Для самой лучшей!</h1>
-            <p class="message">Ты согласна стать моей Валентинкой и подарить мне счастливую неделю! </p>
+            <p class="message">Ты согласна стать моей Валентинкой и подарить мне самый счастливый день в году?</p>
             <div class="buttons">
                 <button class="btn-yes" onclick="startQuiz()">Да! ❤️</button>
                 <button class="btn-no" id="btnNo" onclick="moveButton()">Нет</button>
@@ -669,7 +843,6 @@
             <div class="prizes-title">🎁 Твои призы:</div>
             <div id="prizesContainer"></div>
             <button class="btn-yes" onclick="showFinal()" style="margin-top: 30px;">Продолжить →</button>
-            <button class="btn-yes" onclick="showStats()" style="margin-top: 10px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">📊 Наша Статистика</button>
         </div>
     </div>
 
@@ -699,7 +872,7 @@
     <div id="page6" class="page">
         <div class="stats-container">
             <h2 class="stats-title">📊 Наша Статистика</h2>
-            <p class="stats-subtitle">Наши цифры с 5 января 2026</p>
+            <p class="stats-subtitle">Цифры нашей любви с 5 января 2026</p>
             
             <div class="stats-grid">
                 <!-- Общая статистика -->
@@ -777,13 +950,13 @@
                 <div class="stat-card">
                     <div class="stat-icon">💖</div>
                     <div class="stat-number">5</div>
-                    <div class="stat-label">Я сказал слово "люблю"</div>
+                    <div class="stat-label">Я сказал "люблю"</div>
                 </div>
 
                 <div class="stat-card">
                     <div class="stat-icon">💕</div>
                     <div class="stat-number">8</div>
-                    <div class="stat-label">Ты сказала слово "люблю"</div>
+                    <div class="stat-label">Ты сказала "люблю"</div>
                     <div class="stat-note">🏆 Ты любишь больше!</div>
                 </div>
             </div>
@@ -796,6 +969,68 @@
                     И это только начало нашей истории... 💝
                 </p>
                 <button class="btn-yes" onclick="backToFinal()" style="margin-top: 30px;">← Вернуться</button>
+                <button class="btn-yes" onclick="startQuest()" style="margin-top: 15px; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                    🎮 Хочешь продолжить квест?
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Страница 7: Квест -->
+    <div id="page7" class="page">
+        <div class="quest-container">
+            <div class="quest-header">
+                <h1 class="quest-title">КВЕСТ АКТИВИРОВАН!</h1>
+            </div>
+
+            <div class="loading-section" id="loadingSection">
+                <div class="loader-wrapper">
+                    <div class="loader"></div>
+                    <p class="loading-text"> Загрузка...</p>
+                </div>
+            </div>
+
+            <div class="quest-content" id="questContent" style="display: none;">
+                <div class="quest-message">
+                    <div class="quest-icon">🎁</div>
+                    <h2 class="quest-subtitle">Первая подсказка уже отправлена на твой телефон!</h2>
+                    
+                    <div class="quest-hint">
+                        <div class="hint-box">
+                            <div class="hint-icon">🎁</div>
+                            <p class="hint-text">
+                                Получишь подарок и узнаешь, что дальше...
+                            </p>
+                            <div class="hint-icon">💝</div>
+                        </div>
+                    </div>
+
+                    <div class="quest-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Проверь SMS или возможно позвонят 📱</div>
+                        </div>
+                        <div class="step-arrow">↓</div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Получи подарок 🎁</div>
+                        </div>
+                        <div class="step-arrow">↓</div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Найди записку в подарке 📝</div>
+                        </div>
+                        <div class="step-arrow">↓</div>
+                        <div class="step">
+                            <div class="step-number">?</div>
+                            <div class="step-text">Узнай продолжение... ❓</div>
+                        </div>
+                    </div>
+
+                    <div class="quest-footer-note">
+                        <p>✨ Квест уже начался! ✨</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1072,6 +1307,17 @@
         function backToFinal() {
             document.getElementById('page6').classList.remove('active');
             document.getElementById('page5').classList.add('active');
+        }
+
+        function startQuest() {
+            document.getElementById('page6').classList.remove('active');
+            document.getElementById('page7').classList.add('active');
+            
+            // Через 3 секунды показываем контент квеста
+            setTimeout(() => {
+                document.getElementById('loadingSection').style.display = 'none';
+                document.getElementById('questContent').style.display = 'block';
+            }, 3000);
         }
 
         function createHearts() {
